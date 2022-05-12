@@ -121,7 +121,9 @@ namespace Slutprojekt_Kryptering_Georg
 
         // Metod som utför Ceasarchiffer med först rot7 under fem bokstäver,
         // sedan rot13 under fem bokstäver och fortsätter så.
-        // Kan även göra detta med andra rot och andra mängder bokstäver.
+        // Kan även göra detta med andra rot, andra mängder bokstäver
+        // samt med tre rötter istället för två
+        
         public string KrypteraRotVäxlande(string inputMeddelande, bool avkryptera, int sektionslängd, int rotNr1, int rotNr2, int rotNr3 = -1)
         {
             // Initiera outputMeddelande
@@ -151,13 +153,19 @@ namespace Slutprojekt_Kryptering_Georg
                 sektion = "";
 
                 // Fyll den nuvarande sektionen med bokstäver från inputMeddelande
-                for (int inputMeddelandeBokstavPos = 0; inputMeddelandeBokstavPos < sektionslängd; inputMeddelandeBokstavPos++)
+                for (int inputMeddelandeBokstavPos = i; inputMeddelandeBokstavPos < i + sektionslängd; inputMeddelandeBokstavPos++)
                 {
+                    // Om du har nått slutet på meddelandet
+                    if (inputMeddelandeBokstavPos >= inputMeddelande.Length)
+                    {
+                        break;
+                    }
+
+                    // Fortsätt annars som vanligt
                     sektion += inputMeddelande[inputMeddelandeBokstavPos];
                 }
 
                 // Lägg in sektionen i sektionLista
-                System.Windows.Forms.MessageBox.Show(sektion);
                 sektionLista.Add(sektion);
             }
 
@@ -189,18 +197,18 @@ namespace Slutprojekt_Kryptering_Georg
                 // Detta innebär att loopen tar tre sektioner fram varje gång om det finns tre stycken rötter
                 // men bara två om användaren aldrig har valt några rötter
 
-                // Skicka sektion 1 till KrypteraRot
+                // Skicka sektion 1(i) till KrypteraRot
                 outputMeddelandeLista.Add(KrypteraRot(sektionLista[i], avkryptera, rotNr1));
 
-                // Skicka sektion 2 till KrypteraRot
-                outputMeddelandeLista.Add(KrypteraRot(sektionLista[i], avkryptera, rotNr2));
+                // Skicka sektion 2(i+1) till KrypteraRot
+                outputMeddelandeLista.Add(KrypteraRot(sektionLista[i+1], avkryptera, rotNr2));
 
-                // Skicka sektion 3 till KrypteraRot OM DU HAR VALT ROT 3
+                // Skicka sektion 3(i+2) till KrypteraRot OM DU HAR VALT ROT 3
                 if (treOlikaRot)
                 {
                     // TODO: TA BORT
                     System.Windows.Forms.MessageBox.Show("Test");
-                    outputMeddelandeLista.Add(KrypteraRot(sektionLista[i], avkryptera, rotNr3));
+                    outputMeddelandeLista.Add(KrypteraRot(sektionLista[i+2], avkryptera, rotNr3));
                 }
             }
 

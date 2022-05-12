@@ -146,7 +146,7 @@ namespace Slutprojekt_Kryptering_Georg
             // lblKrypteringsmetodKryptera
             // 
             this.lblKrypteringsmetodKryptera.AutoSize = true;
-            this.lblKrypteringsmetodKryptera.Location = new System.Drawing.Point(43, 228);
+            this.lblKrypteringsmetodKryptera.Location = new System.Drawing.Point(18, 228);
             this.lblKrypteringsmetodKryptera.Name = "lblKrypteringsmetodKryptera";
             this.lblKrypteringsmetodKryptera.Size = new System.Drawing.Size(91, 13);
             this.lblKrypteringsmetodKryptera.TabIndex = 8;
@@ -161,9 +161,9 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot7",
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd"});
-            this.cmbxKrypteringsmetodKryptera.Location = new System.Drawing.Point(140, 225);
+            this.cmbxKrypteringsmetodKryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodKryptera.Name = "cmbxKrypteringsmetodKryptera";
-            this.cmbxKrypteringsmetodKryptera.Size = new System.Drawing.Size(121, 21);
+            this.cmbxKrypteringsmetodKryptera.Size = new System.Drawing.Size(146, 21);
             this.cmbxKrypteringsmetodKryptera.TabIndex = 7;
             // 
             // lblMeddelandeAvkryptera
@@ -217,7 +217,7 @@ namespace Slutprojekt_Kryptering_Georg
             // lblAvkrypteringsmetodAvkryptera
             // 
             this.lblAvkrypteringsmetodAvkryptera.AutoSize = true;
-            this.lblAvkrypteringsmetodAvkryptera.Location = new System.Drawing.Point(31, 228);
+            this.lblAvkrypteringsmetodAvkryptera.Location = new System.Drawing.Point(6, 228);
             this.lblAvkrypteringsmetodAvkryptera.Name = "lblAvkrypteringsmetodAvkryptera";
             this.lblAvkrypteringsmetodAvkryptera.Size = new System.Drawing.Size(103, 13);
             this.lblAvkrypteringsmetodAvkryptera.TabIndex = 15;
@@ -232,9 +232,9 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot7",
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd"});
-            this.cmbxKrypteringsmetodAvkryptera.Location = new System.Drawing.Point(140, 225);
+            this.cmbxKrypteringsmetodAvkryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodAvkryptera.Name = "cmbxKrypteringsmetodAvkryptera";
-            this.cmbxKrypteringsmetodAvkryptera.Size = new System.Drawing.Size(121, 21);
+            this.cmbxKrypteringsmetodAvkryptera.Size = new System.Drawing.Size(146, 21);
             this.cmbxKrypteringsmetodAvkryptera.TabIndex = 14;
             // 
             // Form1
