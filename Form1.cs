@@ -125,5 +125,10 @@ namespace Slutprojekt_Kryptering_Georg
             // Lägg in det krypterade meddelandet i tbxKrypterat
             tbxMeddelandeAvkryptera.Text = avkrypteratMeddelande;
         }
+
+        private void btnSparaInställningar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

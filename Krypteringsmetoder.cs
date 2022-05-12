@@ -15,7 +15,7 @@ namespace Slutprojekt_Kryptering_Georg
         // Sträng med alla bokstäver i det svenska alfabetet
         string alfabet = "abcdefghijklmnopqrstuvwxyzåäö";
 
-        // Egenskaper /TODO: TA bort?
+
         //////////////////////////////////////////////////////
         /*                     Metoder                      */
         //////////////////////////////////////////////////////
@@ -123,7 +123,6 @@ namespace Slutprojekt_Kryptering_Georg
         // sedan rot13 under fem bokstäver och fortsätter så.
         // Kan även göra detta med andra rot, andra mängder bokstäver
         // samt med tre rötter istället för två
-        
         public string KrypteraRotVäxlande(string inputMeddelande, bool avkryptera, int sektionslängd, int rotNr1, int rotNr2, int rotNr3 = -1)
         {
             // Initiera outputMeddelande
@@ -237,6 +236,26 @@ namespace Slutprojekt_Kryptering_Georg
                 outputMeddelande.Append(outputBokstav);
             }
             return outputMeddelande;
+        }
+    
+        // Metoden krypterar metoden med hjälp av en nyckel 
+        public string Nyckelkryptering(string inputMeddelande, string nyckel)
+        {
+            // Konvertera nyckelsträngen till ett nummer genom att ta char representationen
+            // och addera ihop allt. Kanske hitta en bättre metod.
+
+            // Skapa nyckelNummer och ge det ett tomt värde
+            int nyckelNummer = 0;
+
+            // Konvertera nyckel till ett långt nummer
+            for (int i = 0; i < nyckel.Length; i++)
+            {
+                nyckelNummer += Convert.ToInt32(nyckel[i]);
+            }
+
+            // Skapa en slumpgenerator med hjälp av nyckeln som du skapat
+
+            // Multiplicera varje bokstav i meddelandet med ett slumpat tal
         }
     }
 }

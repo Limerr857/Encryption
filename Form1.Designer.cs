@@ -46,15 +46,21 @@ namespace Slutprojekt_Kryptering_Georg
             this.btnAvkrypteraAvkryptera = new System.Windows.Forms.Button();
             this.lblAvkrypteringsmetodAvkryptera = new System.Windows.Forms.Label();
             this.cmbxKrypteringsmetodAvkryptera = new System.Windows.Forms.ComboBox();
+            this.tabInställningar = new System.Windows.Forms.TabPage();
+            this.lblNyckel = new System.Windows.Forms.Label();
+            this.btnSparaInställningar = new System.Windows.Forms.Button();
+            this.tbxNyckel = new System.Windows.Forms.TextBox();
             this.tabMain.SuspendLayout();
             this.tabPageKryptera.SuspendLayout();
             this.tabPageAvkryptera.SuspendLayout();
+            this.tabInställningar.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.tabPageKryptera);
             this.tabMain.Controls.Add(this.tabPageAvkryptera);
+            this.tabMain.Controls.Add(this.tabPageKryptera);
+            this.tabMain.Controls.Add(this.tabInställningar);
             this.tabMain.Location = new System.Drawing.Point(12, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -160,7 +166,8 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot3",
             "Ceasar Rot7",
             "Ceasar Rot13",
-            "Ceasar Rot7 & Rot13; 5 längd"});
+            "Ceasar Rot7 & Rot13; 5 längd",
+            "Nyckelkryptering"});
             this.cmbxKrypteringsmetodKryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodKryptera.Name = "cmbxKrypteringsmetodKryptera";
             this.cmbxKrypteringsmetodKryptera.Size = new System.Drawing.Size(146, 21);
@@ -231,11 +238,53 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot3",
             "Ceasar Rot7",
             "Ceasar Rot13",
-            "Ceasar Rot7 & Rot13; 5 längd"});
+            "Ceasar Rot7 & Rot13; 5 längd",
+            "Nyckelkryptering"});
             this.cmbxKrypteringsmetodAvkryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodAvkryptera.Name = "cmbxKrypteringsmetodAvkryptera";
             this.cmbxKrypteringsmetodAvkryptera.Size = new System.Drawing.Size(146, 21);
             this.cmbxKrypteringsmetodAvkryptera.TabIndex = 14;
+            // 
+            // tabInställningar
+            // 
+            this.tabInställningar.Controls.Add(this.tbxNyckel);
+            this.tabInställningar.Controls.Add(this.btnSparaInställningar);
+            this.tabInställningar.Controls.Add(this.lblNyckel);
+            this.tabInställningar.Location = new System.Drawing.Point(4, 22);
+            this.tabInställningar.Name = "tabInställningar";
+            this.tabInställningar.Size = new System.Drawing.Size(598, 357);
+            this.tabInställningar.TabIndex = 2;
+            this.tabInställningar.Text = "Inställningar";
+            this.tabInställningar.UseVisualStyleBackColor = true;
+            // 
+            // lblNyckel
+            // 
+            this.lblNyckel.AutoSize = true;
+            this.lblNyckel.Location = new System.Drawing.Point(6, 52);
+            this.lblNyckel.Name = "lblNyckel";
+            this.lblNyckel.Size = new System.Drawing.Size(43, 13);
+            this.lblNyckel.TabIndex = 0;
+            this.lblNyckel.Text = "Nyckel:";
+            // 
+            // btnSparaInställningar
+            // 
+            this.btnSparaInställningar.Location = new System.Drawing.Point(454, 310);
+            this.btnSparaInställningar.Name = "btnSparaInställningar";
+            this.btnSparaInställningar.Size = new System.Drawing.Size(114, 23);
+            this.btnSparaInställningar.TabIndex = 1;
+            this.btnSparaInställningar.Text = "Spara Inställningar";
+            this.btnSparaInställningar.UseVisualStyleBackColor = true;
+            this.btnSparaInställningar.Click += new System.EventHandler(this.btnSparaInställningar_Click);
+            // 
+            // tbxNyckel
+            // 
+            this.tbxNyckel.AcceptsReturn = true;
+            this.tbxNyckel.Location = new System.Drawing.Point(6, 68);
+            this.tbxNyckel.Multiline = true;
+            this.tbxNyckel.Name = "tbxNyckel";
+            this.tbxNyckel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbxNyckel.Size = new System.Drawing.Size(255, 138);
+            this.tbxNyckel.TabIndex = 11;
             // 
             // Form1
             // 
@@ -250,6 +299,8 @@ namespace Slutprojekt_Kryptering_Georg
             this.tabPageKryptera.PerformLayout();
             this.tabPageAvkryptera.ResumeLayout(false);
             this.tabPageAvkryptera.PerformLayout();
+            this.tabInställningar.ResumeLayout(false);
+            this.tabInställningar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -273,6 +324,10 @@ namespace Slutprojekt_Kryptering_Georg
         private System.Windows.Forms.Button btnAvkrypteraAvkryptera;
         private System.Windows.Forms.Label lblAvkrypteringsmetodAvkryptera;
         private System.Windows.Forms.ComboBox cmbxKrypteringsmetodAvkryptera;
+        private System.Windows.Forms.TabPage tabInställningar;
+        private System.Windows.Forms.TextBox tbxNyckel;
+        private System.Windows.Forms.Button btnSparaInställningar;
+        private System.Windows.Forms.Label lblNyckel;
     }
 }
 
