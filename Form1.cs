@@ -56,6 +56,20 @@ namespace Slutprojekt_Kryptering_Georg
                     case "Ceasar Rot7 & Rot13; 5 längd":
                         krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 5, 7, 13);
                         break;
+                    case "Nyckelkryptering":
+                        // Hämta nyckeln som ska användas och skicka ett error till användaren
+                        // om det inte har satts till något eller är väldigt kort.
+                        string nyckel = tbxNyckel.Text;
+                        if (nyckel.Length < 5)
+                        {
+                            MessageBox.Show("Var vänlig skriv in en nyckel i inställningsmenyn som är längre än 4 tecken");
+                            krypteratMeddelande = "";
+                        }
+                        else
+                        {
+                            krypteratMeddelande = krypt.Nyckelkryptering(meddelande, false, nyckel);
+                        }
+                        break;
                     default:
                         // Användaren har inte valt en metod
                         krypteratMeddelande = "Var vänlig välj en krypteringsmetod.";
@@ -91,6 +105,20 @@ namespace Slutprojekt_Kryptering_Georg
                     case "Ceasar Rot7 & Rot13; 5 längd":
                         avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 5, 7, 13);
                         break;
+                    case "Nyckelkryptering":
+                        // Hämta nyckeln som ska användas och skicka ett error till användaren
+                        // om det inte har satts till något eller är väldigt kort.
+                        string nyckel = tbxNyckel.Text;
+                        if (nyckel.Length < 5)
+                        {
+                            MessageBox.Show("Var vänlig skriv in en nyckel i inställningsmenyn som är längre än 4 tecken");
+                            avkrypteratMeddelande = "";
+                        }
+                        else
+                        {
+                            avkrypteratMeddelande = krypt.Nyckelkryptering(krypteratMeddelande, true, nyckel);
+                        }
+                        break;
                     default:
                         // Användaren har inte valt en metod
                         avkrypteratMeddelande = "Var vänlig välj en avkrypteringsmetod.";
@@ -124,11 +152,6 @@ namespace Slutprojekt_Kryptering_Georg
 
             // Lägg in det krypterade meddelandet i tbxKrypterat
             tbxMeddelandeAvkryptera.Text = avkrypteratMeddelande;
-        }
-
-        private void btnSparaInställningar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

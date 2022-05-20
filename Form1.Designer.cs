@@ -48,7 +48,6 @@ namespace Slutprojekt_Kryptering_Georg
             this.cmbxKrypteringsmetodAvkryptera = new System.Windows.Forms.ComboBox();
             this.tabInställningar = new System.Windows.Forms.TabPage();
             this.lblNyckel = new System.Windows.Forms.Label();
-            this.btnSparaInställningar = new System.Windows.Forms.Button();
             this.tbxNyckel = new System.Windows.Forms.TextBox();
             this.tabMain.SuspendLayout();
             this.tabPageKryptera.SuspendLayout();
@@ -58,8 +57,8 @@ namespace Slutprojekt_Kryptering_Georg
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.tabPageAvkryptera);
             this.tabMain.Controls.Add(this.tabPageKryptera);
+            this.tabMain.Controls.Add(this.tabPageAvkryptera);
             this.tabMain.Controls.Add(this.tabInställningar);
             this.tabMain.Location = new System.Drawing.Point(12, 12);
             this.tabMain.Name = "tabMain";
@@ -248,7 +247,6 @@ namespace Slutprojekt_Kryptering_Georg
             // tabInställningar
             // 
             this.tabInställningar.Controls.Add(this.tbxNyckel);
-            this.tabInställningar.Controls.Add(this.btnSparaInställningar);
             this.tabInställningar.Controls.Add(this.lblNyckel);
             this.tabInställningar.Location = new System.Drawing.Point(4, 22);
             this.tabInställningar.Name = "tabInställningar";
@@ -265,16 +263,6 @@ namespace Slutprojekt_Kryptering_Georg
             this.lblNyckel.Size = new System.Drawing.Size(43, 13);
             this.lblNyckel.TabIndex = 0;
             this.lblNyckel.Text = "Nyckel:";
-            // 
-            // btnSparaInställningar
-            // 
-            this.btnSparaInställningar.Location = new System.Drawing.Point(454, 310);
-            this.btnSparaInställningar.Name = "btnSparaInställningar";
-            this.btnSparaInställningar.Size = new System.Drawing.Size(114, 23);
-            this.btnSparaInställningar.TabIndex = 1;
-            this.btnSparaInställningar.Text = "Spara Inställningar";
-            this.btnSparaInställningar.UseVisualStyleBackColor = true;
-            this.btnSparaInställningar.Click += new System.EventHandler(this.btnSparaInställningar_Click);
             // 
             // tbxNyckel
             // 
@@ -326,7 +314,6 @@ namespace Slutprojekt_Kryptering_Georg
         private System.Windows.Forms.ComboBox cmbxKrypteringsmetodAvkryptera;
         private System.Windows.Forms.TabPage tabInställningar;
         private System.Windows.Forms.TextBox tbxNyckel;
-        private System.Windows.Forms.Button btnSparaInställningar;
         private System.Windows.Forms.Label lblNyckel;
     }
 }

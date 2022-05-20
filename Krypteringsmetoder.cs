@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Slutprojekt_Kryptering_Georg
 {
     class Krypteringsmetoder
@@ -218,7 +219,7 @@ namespace Slutprojekt_Kryptering_Georg
         }
 
         // Metoden som utför Ceasarchiffer med rot3 
-        // MEN! Denna metoden skiftar karaktärens sifferrepresentation istället för
+        // MEN! Denna metoden skiftar tecknets sifferrepresentation istället för
         // positionen i alfabetet 3 steg så även mellanslag, punkter osv. ändras
         public string KrypteraRot3Char(string inputMeddelande)
         {
@@ -237,25 +238,144 @@ namespace Slutprojekt_Kryptering_Georg
             }
             return outputMeddelande;
         }
-    
-        // Metoden krypterar metoden med hjälp av en nyckel 
-        public string Nyckelkryptering(string inputMeddelande, string nyckel)
+
+        // Metoden (av)krypterar meddelandet med hjälp av en nyckel 
+        public string Nyckelkryptering(string inputMeddelande, bool avkryptera, string nyckel)
         {
             // Konvertera nyckelsträngen till ett nummer genom att ta char representationen
-            // och addera ihop allt. Kanske hitta en bättre metod.
+            // och addera ihop allt. TODO Kanske hitta en bättre metod. eller ta bort den här texten är den ens nödvändig
 
             // Skapa nyckelNummer och ge det ett tomt värde
             int nyckelNummer = 0;
 
-            // Konvertera nyckel till ett långt nummer
+            // Gör om nyckel till ett långt nummer genom addition
+            // TODO: Detta nummer blir faktiskt ganska litet
             for (int i = 0; i < nyckel.Length; i++)
             {
                 nyckelNummer += Convert.ToInt32(nyckel[i]);
             }
 
             // Skapa en slumpgenerator med hjälp av nyckeln som du skapat
+            Random slump = new Random(nyckelNummer);
 
-            // Multiplicera varje bokstav i meddelandet med ett slumpat tal
+            // Skapa inputMeddelandeLista 
+            List<int> inputMeddelandeLista = new List<int>();
+
+            // Skapa outputMeddelande och ge det ett tomt värde
+            string outputMeddelande = "";
+
+            // Skapa outputMeddelandeLista
+            List<char> outputMeddelandeLista = new List<char>();
+
+            if (!avkryptera)
+            {
+                // Meddelandet ska krypteras
+
+                // Gör om inputMeddelande till ett lång lista med nummer
+                for (int i = 0; i < inputMeddelande.Length; i++)
+                {
+                    // Efter varje teckens nummerrepresentation
+                    inputMeddelandeLista.Add(Convert.ToInt32(inputMeddelande[i]));
+                }
+
+                // Skapa outputMeddelandeSiffrorLista
+                List<int> outputMeddelandeSiffrorLista = new List<int>();
+
+                // *Multiplicera* varje nummer i inputMeddelandeLista med ett slumpat tal och spara numret
+                foreach (int nummer in inputMeddelandeLista)
+                {
+                    // Talet som *multipliceras* får inte vara 0 (datan förloras då) 
+                    // eller extremt stort (kan leda till en integer overflow)
+                    // TODO: ÄR DET RÄTT TERM MED INTEGER OVERFLOW!?
+                    outputMeddelandeSiffrorLista.Add(nummer * slump.Next(1, 1000000));
+                }
+
+                // Gör om hela listan till en lång string (en lista)
+                // för att senare kunna plocka isär den siffra för siffra
+                string outputMeddelandeSiffrorString = string.Join(" ", outputMeddelandeSiffrorLista);
+
+                // Gör om varje siffra i outputMeddelandeSiffrorString till en bokstav
+                // efter dess position i det svenska alfabetet (det är coolt)
+                foreach (char tecken in outputMeddelandeSiffrorString)
+                {
+                    if (tecken == ' ')
+                    {
+                        // Konvertera inte bokstaven om det är ett mellanslag
+                        // som ska användas för att särskilja bokstäver i originalmeddelandet
+                        outputMeddelandeLista.Add(' ');
+                    }
+                    else
+                    {
+                        // Gör om char till en int efter dess numeriska värde
+                        // Ex: '2' --> 2
+                        int teckenVärde = (int)char.GetNumericValue(tecken);
+
+                        // Lägg in en bokstav i outputMeddelandeLista utifrån bokstavens
+                        // position i alfabetet (för att det ser coolare ut)
+                        outputMeddelandeLista.Add(alfabet[teckenVärde]);
+                    }
+                }
+            }
+            else
+            {
+                // Meddelandet ska avkrypteras
+
+                // Skapa inputMeddelandeString och ge den ett tomt värde
+                string inputMeddelandeString = "";
+
+                // Skapa inputMeddelandeStringLista
+                List<string> inputMeddelandeStringLista = new List<string>();
+
+                // Gör om varje bokstav i inputMeddelande till en siffra
+                // efter dess position i det svenska alfabetet
+                foreach (char bokstav in inputMeddelande)
+                {
+                    // Ta mellanslaget från den krypterade texten vars syfte är
+                    // att skilja tecken i den okrypterade texten åt och lägg in det oförändrat
+                    if (bokstav == ' ')
+                    {
+                        inputMeddelandeString.Append(' ');
+                    }
+                    else
+                    {
+                        // Lägg in ett siffertecken i inputMeddelandeLista utifrån bokstavens
+                        // position i alfabetet
+                        inputMeddelandeString.Append((char)alfabet.IndexOf(bokstav));
+                    }
+                }
+
+                // Gör om inputMeddelandeString till en lista 
+                inputMeddelandeStringLista = inputMeddelandeString.Split(' ').ToList<string>();
+
+                // Gör om varje string i inputMeddelandeStringLista till en int
+                foreach (string nummerstring in inputMeddelandeStringLista)
+                {
+                    inputMeddelandeLista.Add(int.Parse(nummerstring));
+                }
+
+                // Skapa outputMeddelandeSiffrorLista
+                List<int> outputMeddelandeSiffrorLista = new List<int>();
+
+                // *Dividera* varje nummer i inputMeddelandeLista med ett slumpat tal och spara numret
+                foreach (int nummer in inputMeddelandeLista)
+                {
+                    // Talet som *divideras* får inte vara 0 (datan förloras då) 
+                    // eller extremt stort (kan leda till en integer overflow)
+                    // TODO: ÄR DET RÄTT TERM MED INTEGER OVERFLOW!?
+                    outputMeddelandeSiffrorLista.Add(nummer * slump.Next(1, 1000000));
+                }
+
+                // Gör om outputMeddelandeSiffrorLista till ett lång lista med nummer
+                for (int i = 0; i < outputMeddelandeSiffrorLista.Count; i++)
+                {
+                    // Efter varje teckens nummerrepresentation
+                    outputMeddelandeLista.Add(Convert.ToChar(outputMeddelandeSiffrorLista[i]));
+                }
+
+                // Gör om outputlistan till en string
+                outputMeddelande = string.Join("", outputMeddelandeLista);
+            }
+            return outputMeddelande;
         }
     }
 }
