@@ -56,6 +56,12 @@ namespace Slutprojekt_Kryptering_Georg
                     case "Ceasar Rot7 & Rot13; 5 längd":
                         krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 5, 7, 13);
                         break;
+                    case "Ceasar Rot3 & Rot13; 2 längd":
+                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 2, 3, 13);
+                        break;
+                    case "Ceasar Rot3 & Rot7 & Rot13; 5 längd":
+                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 5, 3, 7, 13);
+                        break;
                     case "Nyckelkryptering":
                         // Hämta nyckeln som ska användas och skicka ett error till användaren
                         // om det inte har satts till något eller är väldigt kort.
@@ -105,13 +111,20 @@ namespace Slutprojekt_Kryptering_Georg
                     case "Ceasar Rot7 & Rot13; 5 längd":
                         avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 5, 7, 13);
                         break;
+                    case "Ceasar Rot3 & Rot13; 2 längd":
+                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 2, 3, 13);
+                        break;
+                    case "Ceasar Rot3 & Rot7 & Rot13; 5 längd":
+                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 5, 3, 7, 13);
+                        break;
                     case "Nyckelkryptering":
                         // Hämta nyckeln som ska användas och skicka ett error till användaren
                         // om det inte har satts till något eller är väldigt kort.
                         string nyckel = tbxNyckel.Text;
-                        if (nyckel.Length < 5)
+                        if (nyckel.Length <= 7)
                         {
-                            MessageBox.Show("Var vänlig skriv in en nyckel i inställningsmenyn som är längre än 4 tecken");
+                            // Nyckeln ska inte kunna gissas alltför lätt, den måste vara ganska lång
+                            MessageBox.Show("Var vänlig skriv in en nyckel under fliken 'nyckel' som är längre än 7 tecken");
                             avkrypteratMeddelande = "";
                         }
                         else
@@ -135,6 +148,14 @@ namespace Slutprojekt_Kryptering_Georg
             // Ta fram det krypterade meddelandet
             string krypteratMeddelande = Kryptera(true);
 
+            // Avbryt krypteringen om det krypterade meddelandet är tomt,
+            // eftersom detta innebär att krypteringen har misslyckats eller
+            // har krypterat ett tomt meddelande.
+            if (krypteratMeddelande == "")
+            {
+                return;
+            }
+
             // Rensa tbxKrypterat för att kunna lägga in det nya krypterade meddelandet
             tbxKrypteratKryptera.Clear();
 
@@ -146,6 +167,14 @@ namespace Slutprojekt_Kryptering_Georg
         {
             // Ta fram det avkrypterade meddelandet
             string avkrypteratMeddelande = Kryptera(false);
+
+            // Avbryt avkrypteringen om det avkrypterade meddelandet är tomt,
+            // eftersom detta innebär att avkrypteringen har misslyckats eller
+            // har avkrypterat ett tomt meddelande.
+            if (avkrypteratMeddelande == "")
+            {
+                return;
+            }
 
             // Rensa tbxKrypterat för att kunna lägga in det nya krypterade meddelandet
             tbxMeddelandeAvkryptera.Clear();

@@ -46,20 +46,20 @@ namespace Slutprojekt_Kryptering_Georg
             this.btnAvkrypteraAvkryptera = new System.Windows.Forms.Button();
             this.lblAvkrypteringsmetodAvkryptera = new System.Windows.Forms.Label();
             this.cmbxKrypteringsmetodAvkryptera = new System.Windows.Forms.ComboBox();
-            this.tabInställningar = new System.Windows.Forms.TabPage();
+            this.tabNyckel = new System.Windows.Forms.TabPage();
             this.lblNyckel = new System.Windows.Forms.Label();
             this.tbxNyckel = new System.Windows.Forms.TextBox();
             this.tabMain.SuspendLayout();
             this.tabPageKryptera.SuspendLayout();
             this.tabPageAvkryptera.SuspendLayout();
-            this.tabInställningar.SuspendLayout();
+            this.tabNyckel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
             // 
             this.tabMain.Controls.Add(this.tabPageKryptera);
             this.tabMain.Controls.Add(this.tabPageAvkryptera);
-            this.tabMain.Controls.Add(this.tabInställningar);
+            this.tabMain.Controls.Add(this.tabNyckel);
             this.tabMain.Location = new System.Drawing.Point(12, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -166,6 +166,8 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot7",
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd",
+            "Ceasar Rot3 & Rot13; 2 längd",
+            "Ceasar Rot3 & Rot7 & Rot13; 5 längd",
             "Nyckelkryptering"});
             this.cmbxKrypteringsmetodKryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodKryptera.Name = "cmbxKrypteringsmetodKryptera";
@@ -238,22 +240,24 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot7",
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd",
+            "Ceasar Rot3 & Rot13; 2 längd",
+            "Ceasar Rot3 & Rot7 & Rot13; 5 längd",
             "Nyckelkryptering"});
             this.cmbxKrypteringsmetodAvkryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodAvkryptera.Name = "cmbxKrypteringsmetodAvkryptera";
             this.cmbxKrypteringsmetodAvkryptera.Size = new System.Drawing.Size(146, 21);
             this.cmbxKrypteringsmetodAvkryptera.TabIndex = 14;
             // 
-            // tabInställningar
+            // tabNyckel
             // 
-            this.tabInställningar.Controls.Add(this.tbxNyckel);
-            this.tabInställningar.Controls.Add(this.lblNyckel);
-            this.tabInställningar.Location = new System.Drawing.Point(4, 22);
-            this.tabInställningar.Name = "tabInställningar";
-            this.tabInställningar.Size = new System.Drawing.Size(598, 357);
-            this.tabInställningar.TabIndex = 2;
-            this.tabInställningar.Text = "Inställningar";
-            this.tabInställningar.UseVisualStyleBackColor = true;
+            this.tabNyckel.Controls.Add(this.tbxNyckel);
+            this.tabNyckel.Controls.Add(this.lblNyckel);
+            this.tabNyckel.Location = new System.Drawing.Point(4, 22);
+            this.tabNyckel.Name = "tabNyckel";
+            this.tabNyckel.Size = new System.Drawing.Size(598, 357);
+            this.tabNyckel.TabIndex = 2;
+            this.tabNyckel.Text = "Nyckel";
+            this.tabNyckel.UseVisualStyleBackColor = true;
             // 
             // lblNyckel
             // 
@@ -287,8 +291,8 @@ namespace Slutprojekt_Kryptering_Georg
             this.tabPageKryptera.PerformLayout();
             this.tabPageAvkryptera.ResumeLayout(false);
             this.tabPageAvkryptera.PerformLayout();
-            this.tabInställningar.ResumeLayout(false);
-            this.tabInställningar.PerformLayout();
+            this.tabNyckel.ResumeLayout(false);
+            this.tabNyckel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -312,7 +316,7 @@ namespace Slutprojekt_Kryptering_Georg
         private System.Windows.Forms.Button btnAvkrypteraAvkryptera;
         private System.Windows.Forms.Label lblAvkrypteringsmetodAvkryptera;
         private System.Windows.Forms.ComboBox cmbxKrypteringsmetodAvkryptera;
-        private System.Windows.Forms.TabPage tabInställningar;
+        private System.Windows.Forms.TabPage tabNyckel;
         private System.Windows.Forms.TextBox tbxNyckel;
         private System.Windows.Forms.Label lblNyckel;
     }

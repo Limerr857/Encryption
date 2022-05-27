@@ -191,7 +191,7 @@ namespace Slutprojekt_Kryptering_Georg
             }
 
             // Skicka sektionerna till KrypteraRot och lägg in alla resultaten i outputMeddelande
-            for (int i = 0; i < sektionLista.Count; i += antalRot)
+            for (int i = 0; i < (sektionLista.Count - (antalRot-1)); i += antalRot)
             {
                 // OBS: Lägg märke till i += antalRot ovan!
                 // Detta innebär att loopen tar tre sektioner fram varje gång om det finns tre stycken rötter
@@ -203,11 +203,9 @@ namespace Slutprojekt_Kryptering_Georg
                 // Skicka sektion 2(i+1) till KrypteraRot
                 outputMeddelandeLista.Add(KrypteraRot(sektionLista[i+1], avkryptera, rotNr2));
 
-                // Skicka sektion 3(i+2) till KrypteraRot OM DU HAR VALT ROT 3
+                // Skicka sektion 3(i+2) till KrypteraRot om användaren har valt en tredje rot
                 if (treOlikaRot)
                 {
-                    // TODO: TA BORT
-                    System.Windows.Forms.MessageBox.Show("Test");
                     outputMeddelandeLista.Add(KrypteraRot(sektionLista[i+2], avkryptera, rotNr3));
                 }
             }
@@ -215,27 +213,6 @@ namespace Slutprojekt_Kryptering_Georg
             // Gör om meddelandelistan till en string som kan returneras
             outputMeddelande = string.Join("", outputMeddelandeLista);
 
-            return outputMeddelande;
-        }
-
-        // Metoden som utför Ceasarchiffer med rot3 
-        // MEN! Denna metoden skiftar tecknets sifferrepresentation istället för
-        // positionen i alfabetet 3 steg så även mellanslag, punkter osv. ändras
-        public string KrypteraRot3Char(string inputMeddelande)
-        {
-            // Initiera det outputMeddelande och ge det värdet av en tom string
-            string outputMeddelande = "";
-            // För varje char i inputMeddelande
-            foreach (char inputMeddelandeBokstav in inputMeddelande)
-            {
-                // konverterar inputMeddelandeBokstav till en sifferrepresentation,
-                // lägger sedan till 3 så att bokstaven byts ut mot bokstaven tre lägen
-                // ner i sifferrepresentationstabellen. 
-                char outputBokstav = Convert.ToChar(Convert.ToInt32(inputMeddelandeBokstav) + 3);
-
-                // Lägger till den outputBokstav till outputMeddelande
-                outputMeddelande.Append(outputBokstav);
-            }
             return outputMeddelande;
         }
 
@@ -258,8 +235,9 @@ namespace Slutprojekt_Kryptering_Georg
             // Skapa en slumpgenerator med hjälp av nyckeln som du skapat
             Random slump = new Random(nyckelNummer);
 
+            // TODO: kolla om alla dessa tre används där nere
             // Skapa inputMeddelandeLista 
-            List<int> inputMeddelandeLista = new List<int>();
+            List<long> inputMeddelandeLista = new List<long>();
 
             // Skapa outputMeddelande och ge det ett tomt värde
             string outputMeddelande = "";
@@ -271,6 +249,7 @@ namespace Slutprojekt_Kryptering_Georg
             {
                 // Meddelandet ska krypteras
 
+                // TODO: gör om till en foreach?
                 // Gör om inputMeddelande till ett lång lista med nummer
                 for (int i = 0; i < inputMeddelande.Length; i++)
                 {
@@ -279,15 +258,15 @@ namespace Slutprojekt_Kryptering_Georg
                 }
 
                 // Skapa outputMeddelandeSiffrorLista
-                List<int> outputMeddelandeSiffrorLista = new List<int>();
+                List<long> outputMeddelandeSiffrorLista = new List<long>();
 
                 // *Multiplicera* varje nummer i inputMeddelandeLista med ett slumpat tal och spara numret
-                foreach (int nummer in inputMeddelandeLista)
+                foreach (long nummer in inputMeddelandeLista)
                 {
                     // Talet som *multipliceras* får inte vara 0 (datan förloras då) 
                     // eller extremt stort (kan leda till en integer overflow)
                     // TODO: ÄR DET RÄTT TERM MED INTEGER OVERFLOW!?
-                    outputMeddelandeSiffrorLista.Add(nummer * slump.Next(1, 1000000));
+                    outputMeddelandeSiffrorLista.Add(nummer * (long)slump.Next(1, 100000));
                 }
 
                 // Gör om hela listan till en lång string (en lista)
@@ -320,11 +299,27 @@ namespace Slutprojekt_Kryptering_Georg
             {
                 // Meddelandet ska avkrypteras
 
-                // Skapa inputMeddelandeString och ge den ett tomt värde
-                string inputMeddelandeString = "";
+                // Kolla först så att indatan är korrekt formaterad
+                // inputMeddelande får bara innehålla a-j och mellanslag?
+                foreach (char bokstav in inputMeddelande)
+                {
+                    if ('a' <= bokstav && bokstav <= 'j' || bokstav == ' ')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Ditt krypterade meddelande har tecken som inte är tillåtna.");
+                        // TODO: Detta kommer att orsaka att det tidigare krypterade meddelandet rensas. Inte optimalt
+                        return "";
+                    }
+                }
 
-                // Skapa inputMeddelandeStringLista
-                List<string> inputMeddelandeStringLista = new List<string>();
+                // Ta bort mellanslag i slutet eller början av meddelandet eftersom det kan krascha programmet
+                inputMeddelande.Trim();
+
+                // Skapa inputMeddelandeTalLista
+                List<int> inputMeddelandeCharLista = new List<int>();
 
                 // Gör om varje bokstav i inputMeddelande till en siffra
                 // efter dess position i det svenska alfabetet
@@ -334,47 +329,95 @@ namespace Slutprojekt_Kryptering_Georg
                     // att skilja tecken i den okrypterade texten åt och lägg in det oförändrat
                     if (bokstav == ' ')
                     {
-                        inputMeddelandeString.Append(' ');
+                        inputMeddelandeCharLista.Add(' ');
                     }
                     else
                     {
                         // Lägg in ett siffertecken i inputMeddelandeLista utifrån bokstavens
                         // position i alfabetet
-                        inputMeddelandeString.Append((char)alfabet.IndexOf(bokstav));
+                        // TODO: klargör vad som händer här
+                        // +'0' är nödvändig för att koversionen ska fungera 
+                        inputMeddelandeCharLista.Add((char)(alfabet.IndexOf(bokstav)+'0'));
                     }
                 }
 
-                // Gör om inputMeddelandeString till en lista 
-                inputMeddelandeStringLista = inputMeddelandeString.Split(' ').ToList<string>();
+                List<string> inputMeddelandeStringLista = new List<string>();
 
-                // Gör om varje string i inputMeddelandeStringLista till en int
+                List<char> inputTemporärLista = new List<char>();
+
+                // inputMeddelandeCharLista ser nu ut så här:
+                // ['1','2','3','4','5',' ','5','4','3','2','1']
+                // Kombinera ihop inputMeddelandeCharLista så att den istället ser ut så här:
+                // ["12345","54321"]
+                foreach (char tecken in inputMeddelandeCharLista)
+                {
+                    if (tecken == ' ')
+                    {
+                        inputMeddelandeStringLista.Add(string.Join("",inputTemporärLista));
+                        inputTemporärLista.Clear();
+                    }
+                    else
+                    {
+                        inputTemporärLista.Add(tecken);
+                    }
+                }
+                // Lägg till den sista strängen
+                inputMeddelandeStringLista.Add(string.Join("", inputTemporärLista));
+
+                // Gör om varje string i inputMeddelandeCharLista till en long
                 foreach (string nummerstring in inputMeddelandeStringLista)
                 {
-                    inputMeddelandeLista.Add(int.Parse(nummerstring));
+                    bool Konverterat = long.TryParse(nummerstring, out long inputMeddelandeLong);
+
+                    if (Konverterat)
+                    {
+                        inputMeddelandeLista.Add(inputMeddelandeLong);
+                    }
+                    else
+                    {
+                        // Om nummerstring inte kan konverteras skickas ett felmeddelande till användaren
+                        System.Windows.Forms.MessageBox.Show("En av dina bokstavssträngar är alldeles för stor (eller så existerar den inte).");
+                        return "";
+                    }
+                    
                 }
 
                 // Skapa outputMeddelandeSiffrorLista
                 List<int> outputMeddelandeSiffrorLista = new List<int>();
 
                 // *Dividera* varje nummer i inputMeddelandeLista med ett slumpat tal och spara numret
-                foreach (int nummer in inputMeddelandeLista)
+                foreach (long nummer in inputMeddelandeLista)
                 {
                     // Talet som *divideras* får inte vara 0 (datan förloras då) 
                     // eller extremt stort (kan leda till en integer overflow)
                     // TODO: ÄR DET RÄTT TERM MED INTEGER OVERFLOW!?
-                    outputMeddelandeSiffrorLista.Add(nummer * slump.Next(1, 1000000));
+                    outputMeddelandeSiffrorLista.Add((int)(nummer / slump.Next(1, 100000)));
                 }
 
+                // TODO: Stämmer detta?
                 // Gör om outputMeddelandeSiffrorLista till ett lång lista med nummer
                 for (int i = 0; i < outputMeddelandeSiffrorLista.Count; i++)
                 {
-                    // Efter varje teckens nummerrepresentation
-                    outputMeddelandeLista.Add(Convert.ToChar(outputMeddelandeSiffrorLista[i]));
+                    // Kontrollera att numret är inom omfånget för teckenvärden
+                    // innan det konverteras till ett tecken
+                    if (outputMeddelandeSiffrorLista[i] <= 65535)
+                    {
+                        // TODO: vad menas med detta lol:
+                        // Efter varje teckens nummerrepresentation
+                        outputMeddelandeLista.Add(Convert.ToChar(outputMeddelandeSiffrorLista[i]));
+                    }
+                    else
+                    {
+                        // Skicka ett felmeddelande till användaren om det inte går
+                        System.Windows.Forms.MessageBox.Show("En av dina bokstavssträngar är för stor.");
+                        return "";
+                    }
+                    
                 }
-
-                // Gör om outputlistan till en string
-                outputMeddelande = string.Join("", outputMeddelandeLista);
             }
+            // Gör om outputlistan till en string
+            outputMeddelande = string.Join("", outputMeddelandeLista);
+
             return outputMeddelande;
         }
     }
