@@ -31,7 +31,6 @@ namespace Slutprojekt_Kryptering_Georg
         {
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPageKryptera = new System.Windows.Forms.TabPage();
-            this.tabPageAvkryptera = new System.Windows.Forms.TabPage();
             this.lblKrypteratKryptera = new System.Windows.Forms.Label();
             this.tbxKrypteratKryptera = new System.Windows.Forms.TextBox();
             this.lblMeddelandeKryptera = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@ namespace Slutprojekt_Kryptering_Georg
             this.btnKrypteraKryptera = new System.Windows.Forms.Button();
             this.lblKrypteringsmetodKryptera = new System.Windows.Forms.Label();
             this.cmbxKrypteringsmetodKryptera = new System.Windows.Forms.ComboBox();
+            this.tabPageAvkryptera = new System.Windows.Forms.TabPage();
             this.lblMeddelandeAvkryptera = new System.Windows.Forms.Label();
             this.tbxMeddelandeAvkryptera = new System.Windows.Forms.TextBox();
             this.lblKrypteratAvkryptera = new System.Windows.Forms.Label();
@@ -47,9 +47,9 @@ namespace Slutprojekt_Kryptering_Georg
             this.lblAvkrypteringsmetodAvkryptera = new System.Windows.Forms.Label();
             this.cmbxKrypteringsmetodAvkryptera = new System.Windows.Forms.ComboBox();
             this.tabNyckel = new System.Windows.Forms.TabPage();
-            this.lblNyckel = new System.Windows.Forms.Label();
-            this.tbxNyckel = new System.Windows.Forms.TextBox();
             this.lblNyckelFörklaring = new System.Windows.Forms.Label();
+            this.tbxNyckel = new System.Windows.Forms.TextBox();
+            this.lblNyckel = new System.Windows.Forms.Label();
             this.tabMain.SuspendLayout();
             this.tabPageKryptera.SuspendLayout();
             this.tabPageAvkryptera.SuspendLayout();
@@ -83,23 +83,6 @@ namespace Slutprojekt_Kryptering_Georg
             this.tabPageKryptera.TabIndex = 0;
             this.tabPageKryptera.Text = "Kryptera";
             this.tabPageKryptera.UseVisualStyleBackColor = true;
-            // 
-            // tabPageAvkryptera
-            // 
-            this.tabPageAvkryptera.Controls.Add(this.lblMeddelandeAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.tbxMeddelandeAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.lblKrypteratAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.tbxKrypteratAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.btnAvkrypteraAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.lblAvkrypteringsmetodAvkryptera);
-            this.tabPageAvkryptera.Controls.Add(this.cmbxKrypteringsmetodAvkryptera);
-            this.tabPageAvkryptera.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAvkryptera.Name = "tabPageAvkryptera";
-            this.tabPageAvkryptera.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAvkryptera.Size = new System.Drawing.Size(598, 357);
-            this.tabPageAvkryptera.TabIndex = 1;
-            this.tabPageAvkryptera.Text = "Avkryptera";
-            this.tabPageAvkryptera.UseVisualStyleBackColor = true;
             // 
             // lblKrypteratKryptera
             // 
@@ -173,6 +156,23 @@ namespace Slutprojekt_Kryptering_Georg
             this.cmbxKrypteringsmetodKryptera.Name = "cmbxKrypteringsmetodKryptera";
             this.cmbxKrypteringsmetodKryptera.Size = new System.Drawing.Size(146, 21);
             this.cmbxKrypteringsmetodKryptera.TabIndex = 7;
+            // 
+            // tabPageAvkryptera
+            // 
+            this.tabPageAvkryptera.Controls.Add(this.lblMeddelandeAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.tbxMeddelandeAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.lblKrypteratAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.tbxKrypteratAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.btnAvkrypteraAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.lblAvkrypteringsmetodAvkryptera);
+            this.tabPageAvkryptera.Controls.Add(this.cmbxKrypteringsmetodAvkryptera);
+            this.tabPageAvkryptera.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAvkryptera.Name = "tabPageAvkryptera";
+            this.tabPageAvkryptera.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAvkryptera.Size = new System.Drawing.Size(598, 357);
+            this.tabPageAvkryptera.TabIndex = 1;
+            this.tabPageAvkryptera.Text = "Avkryptera";
+            this.tabPageAvkryptera.UseVisualStyleBackColor = true;
             // 
             // lblMeddelandeAvkryptera
             // 
@@ -259,14 +259,15 @@ namespace Slutprojekt_Kryptering_Georg
             this.tabNyckel.Text = "Nyckel";
             this.tabNyckel.UseVisualStyleBackColor = true;
             // 
-            // lblNyckel
+            // lblNyckelFörklaring
             // 
-            this.lblNyckel.AutoSize = true;
-            this.lblNyckel.Location = new System.Drawing.Point(6, 52);
-            this.lblNyckel.Name = "lblNyckel";
-            this.lblNyckel.Size = new System.Drawing.Size(43, 13);
-            this.lblNyckel.TabIndex = 0;
-            this.lblNyckel.Text = "Nyckel:";
+            this.lblNyckelFörklaring.AutoSize = true;
+            this.lblNyckelFörklaring.Location = new System.Drawing.Point(3, 209);
+            this.lblNyckelFörklaring.Name = "lblNyckelFörklaring";
+            this.lblNyckelFörklaring.Size = new System.Drawing.Size(593, 13);
+            this.lblNyckelFörklaring.TabIndex = 12;
+            this.lblNyckelFörklaring.Text = "Nyckeln måste vara minst 8 tecken lång och kan innehålla vilka tecken som helst. " +
+    "Ju längre nyckel desto säkrare kryptering.";
             // 
             // tbxNyckel
             // 
@@ -278,14 +279,14 @@ namespace Slutprojekt_Kryptering_Georg
             this.tbxNyckel.Size = new System.Drawing.Size(255, 138);
             this.tbxNyckel.TabIndex = 11;
             // 
-            // lblNyckelFörklaring
+            // lblNyckel
             // 
-            this.lblNyckelFörklaring.AutoSize = true;
-            this.lblNyckelFörklaring.Location = new System.Drawing.Point(6, 219);
-            this.lblNyckelFörklaring.Name = "lblNyckelFörklaring";
-            this.lblNyckelFörklaring.Size = new System.Drawing.Size(394, 13);
-            this.lblNyckelFörklaring.TabIndex = 12;
-            this.lblNyckelFörklaring.Text = "Nyckeln måste vara minst 8 tecken lång och kan innehålla vilka tecken som helst.";
+            this.lblNyckel.AutoSize = true;
+            this.lblNyckel.Location = new System.Drawing.Point(6, 52);
+            this.lblNyckel.Name = "lblNyckel";
+            this.lblNyckel.Size = new System.Drawing.Size(43, 13);
+            this.lblNyckel.TabIndex = 0;
+            this.lblNyckel.Text = "Nyckel:";
             // 
             // Form1
             // 
