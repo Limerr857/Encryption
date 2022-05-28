@@ -49,6 +49,7 @@ namespace Slutprojekt_Kryptering_Georg
             this.tabNyckel = new System.Windows.Forms.TabPage();
             this.lblNyckel = new System.Windows.Forms.Label();
             this.tbxNyckel = new System.Windows.Forms.TextBox();
+            this.lblNyckelFörklaring = new System.Windows.Forms.Label();
             this.tabMain.SuspendLayout();
             this.tabPageKryptera.SuspendLayout();
             this.tabPageAvkryptera.SuspendLayout();
@@ -167,7 +168,6 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd",
             "Ceasar Rot3 & Rot13; 2 längd",
-            "Ceasar Rot3 & Rot7 & Rot13; 5 längd",
             "Nyckelkryptering"});
             this.cmbxKrypteringsmetodKryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodKryptera.Name = "cmbxKrypteringsmetodKryptera";
@@ -241,7 +241,6 @@ namespace Slutprojekt_Kryptering_Georg
             "Ceasar Rot13",
             "Ceasar Rot7 & Rot13; 5 längd",
             "Ceasar Rot3 & Rot13; 2 längd",
-            "Ceasar Rot3 & Rot7 & Rot13; 5 längd",
             "Nyckelkryptering"});
             this.cmbxKrypteringsmetodAvkryptera.Location = new System.Drawing.Point(115, 225);
             this.cmbxKrypteringsmetodAvkryptera.Name = "cmbxKrypteringsmetodAvkryptera";
@@ -250,6 +249,7 @@ namespace Slutprojekt_Kryptering_Georg
             // 
             // tabNyckel
             // 
+            this.tabNyckel.Controls.Add(this.lblNyckelFörklaring);
             this.tabNyckel.Controls.Add(this.tbxNyckel);
             this.tabNyckel.Controls.Add(this.lblNyckel);
             this.tabNyckel.Location = new System.Drawing.Point(4, 22);
@@ -277,6 +277,15 @@ namespace Slutprojekt_Kryptering_Georg
             this.tbxNyckel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbxNyckel.Size = new System.Drawing.Size(255, 138);
             this.tbxNyckel.TabIndex = 11;
+            // 
+            // lblNyckelFörklaring
+            // 
+            this.lblNyckelFörklaring.AutoSize = true;
+            this.lblNyckelFörklaring.Location = new System.Drawing.Point(6, 219);
+            this.lblNyckelFörklaring.Name = "lblNyckelFörklaring";
+            this.lblNyckelFörklaring.Size = new System.Drawing.Size(394, 13);
+            this.lblNyckelFörklaring.TabIndex = 12;
+            this.lblNyckelFörklaring.Text = "Nyckeln måste vara minst 8 tecken lång och kan innehålla vilka tecken som helst.";
             // 
             // Form1
             // 
@@ -319,6 +328,7 @@ namespace Slutprojekt_Kryptering_Georg
         private System.Windows.Forms.TabPage tabNyckel;
         private System.Windows.Forms.TextBox tbxNyckel;
         private System.Windows.Forms.Label lblNyckel;
+        private System.Windows.Forms.Label lblNyckelFörklaring;
     }
 }
 

@@ -20,20 +20,16 @@ namespace Slutprojekt_Kryptering_Georg
         // Skapa ett objekt från klassen Krypteringsmetoder som innehåller alla krypteringsmetoder
         Krypteringsmetoder krypt = new Krypteringsmetoder();
 
-        /*                       Metoder                       */
-        // bool kryptera bestämmer om funktionen ska kalla på avkrytperingsmetoder
+        // bool kryptera bestämmer om funktionen ska använda avkrytperingsmetoder
         // eller krypteringsmetoder, true = krytperingsmetoder
         string Kryptera(bool kryptera)
         {
-            // TODO: Se till så att inga värden hämtas inuti metoden?
-            // de borde kanske hämtas utanför eller iallafall på en samlad plats
-
             // Dela upp beroende på om det är avkryptering eller kryptering som gäller
             if (kryptera)
             {
                 // Ett meddelande ska krypteras
 
-                // Initiera det krypterade meddelandet, ge det ett värde senare
+                // Skapa det krypterade meddelandet, ge det ett värde senare
                 string krypteratMeddelande;
 
                 // Hämta meddelandet som ska krypteras
@@ -45,40 +41,39 @@ namespace Slutprojekt_Kryptering_Georg
                 switch (metod)
                 {
                     case "Ceasar Rot3":
-                        krypteratMeddelande = krypt.KrypteraRot(meddelande, false, 3);
+                        krypteratMeddelande = krypt.KrypteraRot(meddelande, true, 3);
                         break;
                     case "Ceasar Rot7":
-                        krypteratMeddelande = krypt.KrypteraRot(meddelande, false, 7);
+                        krypteratMeddelande = krypt.KrypteraRot(meddelande, true, 7);
                         break;
                     case "Ceasar Rot13":
-                        krypteratMeddelande = krypt.KrypteraRot(meddelande, false, 13);
+                        krypteratMeddelande = krypt.KrypteraRot(meddelande, true, 13);
                         break;
                     case "Ceasar Rot7 & Rot13; 5 längd":
-                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 5, 7, 13);
+                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, true, 5, 7, 13);
                         break;
                     case "Ceasar Rot3 & Rot13; 2 längd":
-                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 2, 3, 13);
-                        break;
-                    case "Ceasar Rot3 & Rot7 & Rot13; 5 längd":
-                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, false, 5, 3, 7, 13);
+                        krypteratMeddelande = krypt.KrypteraRotVäxlande(meddelande, true, 2, 3, 13);
                         break;
                     case "Nyckelkryptering":
                         // Hämta nyckeln som ska användas och skicka ett error till användaren
                         // om det inte har satts till något eller är väldigt kort.
                         string nyckel = tbxNyckel.Text;
-                        if (nyckel.Length < 5)
+                        if (nyckel.Length <= 7)
                         {
-                            MessageBox.Show("Var vänlig skriv in en nyckel i inställningsmenyn som är längre än 4 tecken");
+                            // Nyckeln ska inte kunna gissas alltför lätt, den måste vara ganska lång
+                            MessageBox.Show("Skriv in en nyckel under fliken 'nyckel' som är längre än 7 tecken");
                             krypteratMeddelande = "";
                         }
                         else
                         {
-                            krypteratMeddelande = krypt.Nyckelkryptering(meddelande, false, nyckel);
+                            krypteratMeddelande = krypt.Nyckelkryptering(meddelande, true, nyckel);
                         }
                         break;
                     default:
                         // Användaren har inte valt en metod
-                        krypteratMeddelande = "Var vänlig välj en krypteringsmetod.";
+                        MessageBox.Show("Du måste välja en krypteringsmetod.");
+                        krypteratMeddelande = "";
                         break;
                 }
 
@@ -88,7 +83,7 @@ namespace Slutprojekt_Kryptering_Georg
             {
                 // Ett meddelande ska avkrypteras
 
-                // Initiera det avkrypterade meddelandet, ge det ett värde senare
+                // Skapa det avkrypterade meddelandet, ge det ett värde senare
                 string avkrypteratMeddelande;
 
                 // Hämta meddelandet som ska avkrypteras
@@ -100,22 +95,19 @@ namespace Slutprojekt_Kryptering_Georg
                 switch (metod)
                 {
                     case "Ceasar Rot3":
-                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, true, 3);
+                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, false, 3);
                         break;
                     case "Ceasar Rot7":
-                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, true, 7);
+                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, false, 7);
                         break;
                     case "Ceasar Rot13":
-                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, true, 13);
+                        avkrypteratMeddelande = krypt.KrypteraRot(krypteratMeddelande, false, 13);
                         break;
                     case "Ceasar Rot7 & Rot13; 5 längd":
-                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 5, 7, 13);
+                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, false, 5, 7, 13);
                         break;
                     case "Ceasar Rot3 & Rot13; 2 längd":
-                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 2, 3, 13);
-                        break;
-                    case "Ceasar Rot3 & Rot7 & Rot13; 5 längd":
-                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, true, 5, 3, 7, 13);
+                        avkrypteratMeddelande = krypt.KrypteraRotVäxlande(krypteratMeddelande, false, 2, 3, 13);
                         break;
                     case "Nyckelkryptering":
                         // Hämta nyckeln som ska användas och skicka ett error till användaren
@@ -124,17 +116,18 @@ namespace Slutprojekt_Kryptering_Georg
                         if (nyckel.Length <= 7)
                         {
                             // Nyckeln ska inte kunna gissas alltför lätt, den måste vara ganska lång
-                            MessageBox.Show("Var vänlig skriv in en nyckel under fliken 'nyckel' som är längre än 7 tecken");
+                            MessageBox.Show("Skriv in en nyckel under fliken 'nyckel' som är längre än 7 tecken");
                             avkrypteratMeddelande = "";
                         }
                         else
                         {
-                            avkrypteratMeddelande = krypt.Nyckelkryptering(krypteratMeddelande, true, nyckel);
+                            avkrypteratMeddelande = krypt.Nyckelkryptering(krypteratMeddelande, false, nyckel);
                         }
                         break;
                     default:
                         // Användaren har inte valt en metod
-                        avkrypteratMeddelande = "Var vänlig välj en avkrypteringsmetod.";
+                        MessageBox.Show("Du måste välja en krypteringsmetod.");
+                        avkrypteratMeddelande = "";
                         break;
                 }
 
